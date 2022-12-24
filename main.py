@@ -10,7 +10,7 @@ today = datetime.now()
 start_date = os.environ['START_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
-meetday = os.environ['MEETDAY']
+newyear = os.environ['HAPPYNEWYEAR']
 
 app_id = os.environ["APP_ID"]
 app_secret = os.environ["APP_SECRET"]
@@ -35,8 +35,8 @@ def get_birthday():
     next = next.replace(year=next.year + 1)
   return (next - today).days
 
-def get_meetday():
-  next = datetime.strptime(str(date.today().year) + "-" + meetday, "%Y-%m-%d")
+def get_NewYear():
+  next = datetime.strptime(str(date.today().year) + "-" + newyear, "%Y-%m-%d")
   if next < datetime.now():
     next = next.replace(year=next.year + 1)
   return (next - today).days
@@ -55,6 +55,6 @@ client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
 wea, temperature = get_weather()
-data = {"weather":{"value":wea},"temperature":{"value":temperature},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()},"meetday_left":{"value":get_meetday()}}
+data = {"weather":{"value":wea},"temperature":{"value":temperature},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()},"newyear_left":{"value":get_newyear()}}
 res = wm.send_template(user_id, template_id, data)
 print(res)
