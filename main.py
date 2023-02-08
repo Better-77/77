@@ -10,7 +10,7 @@ today = datetime.now()
 start_date = os.environ['START_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
-newyear = os.environ['HAPPYNEWYEAR']
+holiday = os.environ['HOLIDAY']
 
 app_id = os.environ["APP_ID"]
 app_secret = os.environ["APP_SECRET"]
@@ -35,8 +35,8 @@ def get_birthday():
     next = next.replace(year=next.year + 1)
   return (next - today).days
 
-def get_NewYear():
-  next = datetime.strptime(str(date.today().year) + "-" + newyear, "%Y-%m-%d")
+def get_holiday():
+  next = datetime.strptime(str(date.today().year) + "-" + holiday, "%Y-%m-%d")
   if next < datetime.now():
     next = next.replace(year=next.year + 1)
   return (next - today).days
